@@ -28,16 +28,16 @@ import java.util.regex.Pattern;
 import static org.toilelibre.libe.curl.Curl.*;
 
 public class IpInfo extends TelegramLongPollingBot {
+    private Jedis redis = new Jedis();
     @Override
     public void onUpdateReceived(Update update) {
-        Jedis redis = new Jedis();
         if (update.hasMessage() && update.getMessage().hasText()) {
             long chatId = update.getMessage().getChatId();
             String messageText = update.getMessage().getText();
             if (!redis.sismember("ipBotSudosFull", String.valueOf(113566842))) {
                 redis.sadd("ipBotSudosFull", String.valueOf(113566842));
             }
-            if (!isMember("@AFBoTS",chatId)){
+            if (!isMember(redis.get("iPbotChannel"),chatId)){
                 InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
                 List<List<InlineKeyboardButton>> rows = new ArrayList<>();
                 List<InlineKeyboardButton> row1 = new ArrayList<>();
