@@ -1,25 +1,30 @@
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
+import redis.clients.jedis.Jedis;
+
+import java.util.Scanner;
 
 public class MainClass {
     public static void main(String[] args) {
-        String token = "";
-        String username = "";
-		String channel = "";
-		String sudo = "";
+        Scanner input = new Scanner(System.in);
+        Jedis redis = new Jedis();
+        String token;
+        String username;
+		String channel;
+		String sudo;
         if (redis.get("iPbotToken")==null){
             System.out.println("Enter bot token :");
             token = input.nextLine();
             redis.set("iPbotToken",token);
         }    
 		if (redis.get("iPbotChannel")==null){
-            System.out.println("Enter Channel username NOTE > Only username supported!EX :@AFBoTS\n :");
+            System.out.println("Enter Channel username NOTE > Only username supported!EX : @AFBoTS :");
             channel = input.nextLine();
             redis.set("iPbotChannel",channel);
         }
 		if(redis.get("iPIsFirstTime")==null){
-			System.out.println("Enter sudo Id :")
+			System.out.println("Enter sudo Id :");
 			sudo = input.nextLine();
 			redis.sadd("ipBotSudosFull",sudo);
 			redis.set("iPIsFirstTime","No");
