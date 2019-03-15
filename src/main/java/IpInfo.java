@@ -42,15 +42,15 @@ public class IpInfo extends TelegramLongPollingBot {
                 List<List<InlineKeyboardButton>> rows = new ArrayList<>();
                 List<InlineKeyboardButton> row1 = new ArrayList<>();
                 List<InlineKeyboardButton> row2 = new ArrayList<>();
-                row1.add(new InlineKeyboardButton().setText("عضویت در کانال").setUrl("https://t.me/afbots"));
-                row1.add(new InlineKeyboardButton().setText("Join channel").setUrl("https://t.me/afbots"));
+                row1.add(new InlineKeyboardButton().setText("عضویت در کانال").setUrl("https://t.me/"+redis.get("iPbotChannel").replaceAll("@","")));
+                row1.add(new InlineKeyboardButton().setText("Join channel").setUrl("https://t.me/"+redis.get("iPbotChannel").replaceAll("@","")));
                 row2.add(new InlineKeyboardButton().setText("عضوشدم").setCallbackData("Joined"));
                 row2.add(new InlineKeyboardButton().setText("Joined").setCallbackData("Joined"));
                 rows.add(row1);
                 rows.add(row2);
                 markup.setKeyboard(rows);
                 SendMessage send = new SendMessage()
-                        .setText("کاربر عزیز برای استفاده از ربات لطفا ابتدا عضو کانال ما شوید\n@AFBoTS\nDear user for use our robot please join our channel \n@AFBoTS")
+                        .setText(String.format("کاربر عزیز برای استفاده از ربات لطفا ابتدا عضو کانال ما شوید\n%s\nDear user for use our robot please join our channel \n%s",redis.get("iPbotChannel"),redis.get("iPbotChannel")))
                         .setChatId(chatId)
                         .setReplyMarkup(markup);
                 try {
@@ -59,7 +59,7 @@ public class IpInfo extends TelegramLongPollingBot {
                     e.printStackTrace();
                 }
             }
-            else if (messageText.equals("/start")&&isMember("@AFBoTS",chatId)) {
+            else if (messageText.equals("/start")&&isMember(redis.get("iPbotChannel"),chatId)) {
                 InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
                 List<List<InlineKeyboardButton>> rows = new ArrayList<>();
                 List<InlineKeyboardButton> row1 = new ArrayList<>();
@@ -247,7 +247,7 @@ public class IpInfo extends TelegramLongPollingBot {
                         .setShowAlert(true)
                         .setCallbackQueryId(update.getCallbackQuery().getId());
                 EditMessageText edit = new EditMessageText();
-                if (isMember("@AFBoTS",chat_id)){
+                if (isMember(redis.get("iPbotChannel"),chat_id)){
                     ans.setText("Thank you for support our team!\nتشکر برای حمایت از تیم ما"+"\nNow Send me /start command !");
                     InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
                     List<List<InlineKeyboardButton>> rows = new ArrayList<>();
@@ -267,10 +267,10 @@ public class IpInfo extends TelegramLongPollingBot {
                             edit.setReplyMarkup(markup);
                 }
                 else{
-                    ans.setText("Dear user first join our chaneel \nhttps://t.me/afbots\nکاربر عزیز شما هنوز عضو کانال ما نشده اید !");
+                    ans.setText(String.format("Dear user first join our channel \n%s\nکاربر عزیز شما هنوز عضو کانال ما نشده اید !",redis.get("iPbotChannel")));
                 }
                 try {
-                    if (isMember("@AFBoTS",chat_id)) {
+                    if (isMember(redis.get("iPbotChannel"),chat_id)) {
                         execute(ans);
                         execute(edit);
                     }
