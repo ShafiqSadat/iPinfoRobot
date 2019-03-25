@@ -76,7 +76,7 @@ public class IpInfo extends TelegramLongPollingBot {
                         .setReplyToMessageId(update.getMessage().getMessageId())
                         .setCaption("Hi  Welcome to IP Info bot\n\nسلام به ربات اطلاعات ایپی خوش آمدید !")
                         .setReplyMarkup(markup)
-                        .setPhoto("AgADBQAD_acxG6NyQVRTAAHzHNqJY1sNNdUyAATFidhqSaRFX0XUAAIC")
+                        .setPhoto("https://connectedover.com/images/hide_ip.png")
                         .setChatId(chatId);
                 try {
                     sendPhoto(send);
