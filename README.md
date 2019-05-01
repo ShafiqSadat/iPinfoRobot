@@ -16,7 +16,7 @@ sudo apt install redis-server
 # How to use
 
 ```
-import project to IDE then wait for download dependencies after dwonload you can run project!
+import project to IDE then wait for download dependencies after download you can run project!
 ```
 
 ![alt text](https://i.imgur.com/yKZHkxa.png)
