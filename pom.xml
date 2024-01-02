@@ -24,21 +24,22 @@
         <dependency>
             <groupId>org.telegram</groupId>
             <artifactId>telegrambots</artifactId>
-            <version>3.6.1</version>
+            <version>6.8.0</version>
         </dependency>
 
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-            <version>2.9.0</version>
-            <type>jar</type>
-            <scope>compile</scope>
+            <version>5.0.0</version>
         </dependency>
+
         <dependency>
             <groupId>org.toile-libre.libe</groupId>
             <artifactId>curl</artifactId>
             <version>LATEST</version>
         </dependency>
+
+
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>

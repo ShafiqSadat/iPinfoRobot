@@ -1,12 +1,13 @@
-import org.telegram.telegrambots.ApiContextInitializer;
-import org.telegram.telegrambots.TelegramBotsApi;
-import org.telegram.telegrambots.exceptions.TelegramApiException;
+
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 import redis.clients.jedis.Jedis;
 
 import java.util.Scanner;
 
 public class MainClass {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws TelegramApiException {
         Scanner input = new Scanner(System.in);
         Jedis redis = new Jedis();
         String token;
@@ -34,8 +35,7 @@ public class MainClass {
             username = input.nextLine();
             redis.set("iPbotUserName",username);
         }
-        ApiContextInitializer.init();
-        TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
+        TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
         try {
             telegramBotsApi.registerBot(new IpInfo());
         } catch (TelegramApiException e) {
